@@ -1,0 +1,194 @@
+﻿@using ShopOnline.Models;
+@{
+    ViewBag.Title = "Success";
+    Layout =  null;
+}
+@{
+    Bill b = ViewBag.bill ?? new Bill();
+}
+
+<html class="no-js" xmlns="//www.w3.org/1999/xhtml" xmlns:fb='//www.facebook.com/2008/fbml'>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Hóa đơn khách hàng - @DateTime.Now.ToString("dd/MM/yyyy")</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="vietnamese" />
+    <meta name="rating" content="general" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <style>
+        #pagePrint input {
+            background: url('../../FileUploads/images/print_button.png') no-repeat scroll center center;
+            border: medium none;
+            cursor: pointer;
+            height: 30px;
+            width: 90px;
+        }
+
+        #pagePrint {
+            position: absolute;
+            right: 30px;
+            top: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <div style="background: black; height: 30px; position: fixed; top: 0; width: 100%; z-index: 100;"></div>
+    <div style="background: black; position: relative; z-index: 9999;">
+        <div style="background: #fff; margin: 0 auto; position: relative; width: 700px;">
+            <form id="pagePrint">
+                <input type="button" value="" onClick="window.print()">
+            </form>
+            <div style="opacity: 0.15; position: absolute; text-align: center;width:100%;top: 250px;">
+                <img src="~/FileUploads/images/logo.png" alt="" width="95%" />
+            </div>
+            <div class="trang_in" style="font-size: 14px; padding: 10px 30px;">
+                <div style="border-bottom: 3px double #005888; overflow: hidden; padding: 5px 0;">
+                    <img src="~/FileUploads/images/logo.png" alt="" width="100px" style="float: left;" />
+                </div>
+                <h1 style="color: #005888; margin: 14px 0; text-align: center;">Hóa đơn khách hàng</h1>
+                <hr style="width:50%;border:inset 1px;">
+                <style>
+                    .print_content ol li {
+                        font-weight: bold;
+                        list-style: inside;
+                    }
+
+                    .print_content ul li {
+                        font-weight: normal;
+                        list-style: outside;
+                        margin-left: 36px;
+                        padding-left: 10px;
+                    }
+
+                    .print_content li {
+                        margin-top: 7px;
+                        margin-bottom: 7px;
+                    }
+                </style>
+                <div class="print_content">
+                    <div class="row">
+                        <div class="card">
+                            <div class="card-header">
+                                Hóa đơn
+                                <strong>@DateTime.Now.ToString("dd/MM/yyyy")</strong>
+                                <span class="pull-right">
+                                    <strong>Trạng Thái:</strong>
+                                    Thành công
+                                    <i class="fa fa-check" style="color:green;"></i>
+                                </span>
+
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-4" style="padding-bottom: 30px;">
+                                    <div class="col-sm-6">
+                                        <h6 class="mb-3">From:</h6>
+                                        <div>
+                                            <strong>Shop online</strong>
+                                        </div>
+                                        <div>Cầu giấy - Hà Nội</div>
+                                        <div>Email: PhucND@gmail.com</div>
+                                        <div>Phone: +84 973642632</div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <h6 class="mb-3">To:</h6>
+                                        <div>
+                                            <strong>@b.FullName</strong>
+                                        </div>
+                                        <div>Địa chỉ: @b.Address</div>
+                                        <div>Email: @b.Email</div>
+                                        <div>Phone: @b.Phone</div>
+                                    </div>
+
+
+
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">#</th>
+                                                <th class="text-center">Item</th>
+                                                <th class="text-center">Unit Cost</th>
+                                                <th class="text-center">Qty</th>
+                                                <th class="text-center">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in b.BillDetails)
+                                            {
+                                                <tr>
+                                                    <td class="text-center">@item.ProductID</td>
+                                                    <td class="text-center">@item.ProductName</td>
+                                                    <td class="text-center">@item.PriceProduct.ToString("#,##0") VNĐ</td>
+                                                    <td class="text-center">@item.Amount</td>
+                                                    <td class="text-center">@((item.PriceProduct*item.Amount).ToString("#,##0")) VNĐ</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4"></div>
+
+                                    <div class="col-md-8">
+                                        <table class="table table-clear">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="left">
+                                                        <strong>Subtotal</strong>
+                                                    </td>
+                                                    <td class="right">@b.TotalBill.ToString("#,##0") VNĐ</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="left">
+                                                        <strong>Discount (20%)</strong>
+                                                    </td>
+                                                    <td class="right">@((b.TotalBill*20/100).ToString("#,##0")) VNĐ</td>
+                                                </tr>
+                                               
+                                                <tr>
+                                                    <td class="left">
+                                                        <strong>Total</strong>
+                                                    </td>
+                                                    <td class="right">
+                                                        <strong>@((b.TotalBill- (b.TotalBill * 20 / 100)).ToString("#,##0")) VNĐ</strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p style="border-bottom: 1px solid #c0c0c0; color: #005888; font-weight: bold; margin-top: 30px; padding-bottom: 5px;">Liên Hệ:</p>
+                <p style="font-weight: bold; margin: 15px 0 5px; text-transform: uppercase;">
+                    <span style="color: #017aab;"></span> <span style="color: #ce2621;">Shop online</span>
+                </p>
+                <p>Adress: <font style="color: #005888;">147 Mai Dịch - Hà Nội</font></p>
+                <p>SĐT: <font style="color: #005888;">0973642632</font></p>
+                <p>Email: <font style="color: #005888;">PhucND@gmail.com</font> - Website: <font><a href="Luonbenban.com">Luonbenban.com</a></font></p>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div style="background: black;  bottom: 0; height: 30px; position: fixed; width: 100%; z-index: 100;"></div>
+
+</body>
+</html>
+
+
+
+
+

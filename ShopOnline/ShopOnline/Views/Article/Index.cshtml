@@ -1,0 +1,137 @@
+﻿@using LuonBenBan.Model.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var lst = ViewBag.lst;
+}
+
+<!-- Main Breadcrumb -->
+<div class="main-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="/">Trang chủ</a></li>
+                    <li class="active">Tin tức</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Main Breadcrumb -->
+<!-- Main Content -->
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="blog-banner-top">
+                    <a href="~/FileUploads/images/blog_banner_top.png">
+                        <img src="~/FileUploads/images/blog_banner_top.png" class="img-responsive" alt="Quảng cáo" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="blog-home-title clearfix">
+                    <h1>Tin tức</h1>
+                </div>
+                <div class="blog-article clearfix" id="ContainerArticle">
+                    @*@foreach (Article p in lst)
+                    {
+                        <div class="blog-item">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="Article/@p.Alias--@p.ArticleID">
+                                        <img src="@p.ArticleImage" alt="" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="col-md-8">
+                                    <h3 class="blog-name"><a href="Article/@p.Alias--@p.ArticleID">@p.Title</a></h3>
+                                    <p class="blog-info">@p.CreatedBy | @p.CreatedDate</p>
+                                    <p class="blog-description">
+                                        @p.Description
+                                    </p>
+                                    <p class="blog-cate"><i class="fa fa-tags"></i> Chuyên mục: <a href="/tin-tuc">Tin tức</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    }*@
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="text-center" style="padding-top: 10px;">
+                    <button id="LoadMoreArticle" class="btn btn-success">Load More</button>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="blog-cata block">
+                    <h2 class="blog-heading"><i class="fa fa-caret-right"></i> Danh mục tin</h2>
+                    <div class="blog-cata-content">
+                        <ul>
+
+                            <li class=""><a href="/tu-van">Tư vấn</a></li>
+
+                            <li class=""><a href="/tuyen-dung">Tuyển dụng</a></li>
+
+                            <li class="active"><a href="/tin-tuc">Tin tức</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="blog-banner block">
+                    <a href="#"><img src="~/FileUploads/images/banner-blog.png" /></a>
+                </div>
+
+                <div class="blog-new block">
+                    <h2 class="blog-heading"><i class="fa fa-caret-right"></i> Có thể bạn quan tâm</h2>
+                    <div class="blog-new-content">
+                        @foreach (Article p in lst)
+                        {
+                            <div class="blog-new-name">
+                                <a href="/tin-tuc-@p.Alias-@p.ArticleID">@p.MetaTitle</a>
+                                <p class="blog-info">"@p.CreatedBy"| @p.CreatedDate</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="template-GetArticles" type="x-tmpl-mustache">
+    <div class="blog-item">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="/tin-tuc-{{Alias}}-{{ArticleID}}">
+                    <img src="{{ArticleImage}}" alt="{{title}}" class="img-responsive">
+                </a>
+            </div>
+            <div class="col-md-8">
+                <h3 class="blog-name"><a href="/tin-tuc-{{Alias}}-{{ArticleID}}">{{ArticleTitle}}</a></h3>
+                <p class="blog-info">{{CreatedBy}} | {{CreatedDate}}</p>
+                <p class="blog-description">
+                    {{ArticleDescription}}
+                </p>
+                <p class="blog-cate"><i class="fa fa-tags"></i> Chuyên mục: <a href="/tin-tuc">Tin tức</a></p>
+            </div>
+        </div>
+    </div>
+</script>
+<script>
+    var ArticleProp = {
+        linkUrl: "/Articles/Get",
+        templateID: "#template-GetArticles",
+        elmentID: "#ContainerArticle"
+    }
+    ArticleController.constructor(1, 2, ArticleProp); // hàm khởi tạo 1: là số trang, 6: là số lượng bản ghi, prop là đối tượng
+    ArticleController.init(); // khởi tạo trạng thái load ban đầu
+    ArticleController.LoadMore("#LoadMoreArticle") // khi ấn Load More
+</script>
+    <!-- End Main Content -->

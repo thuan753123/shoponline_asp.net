@@ -1,0 +1,60 @@
+﻿@using ShopOnline.Models;
+@{
+    ViewBag.Title = "Thông tin tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    Customer user = (Customer)Session["us"];
+}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <img src="~/FileUploads/images/1.png" alt="" class="img-rounded img-responsive" />
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        <div class="col-md-9 col-lg-9 ">
+                            <h4>@user.FullName</h4>
+                            <table class="table table-user-information">
+                                <tbody>
+                                    <tr>
+                                        <td>UserName:</td>
+                                        <td>@user.UserName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ngày Sinh:</td>
+                                        <td>@user.DateOfBirth</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Địa chỉ</td>
+                                        <td>@user.Address</td>
+                                    </tr>
+                                   
+                                    <tr>
+                                    <tr>
+                                        <td>Giới tính</td>
+                                        @if (@user.Gender == true)
+                                        {
+                                            <td>Nam</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Nữ</td>
+                                        }
+                                    </tr>
+                                    <tr>
+                                        <td>Email</td>
+                                        <td><a href="mailto:@user.Email">@user.Email</a></td>
+                                    </tr>  
+                            </table>
+                            <a href="#" class="btn btn-primary">Đơn hàng</a>
+                            <a href="#" class="btn btn-primary">Chỉnh sửa tài khoản</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

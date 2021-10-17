@@ -1,0 +1,74 @@
+﻿<div id="page-title">
+    <h5 class="text-overflow">sửa nhà sản xuất</h5>
+    <!--Searchbox-->
+    <div class="searchbox">
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" placeholder="Search..">
+            <span class="input-group-btn">
+                <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+    <li><a ui-sref="home">Home</a></li>
+    <li><a ui-sref="product">Nhà sản xuất</a></li>
+    <li class="active">Sửa nhà sản xuất</li>
+</ol>
+<!--End breadcrumb-->
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content" ng-controller="producerEditController">
+    <div class="panel">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label">Mã nhà sản xuất</label>
+                        <input type="text" class="form-control" ng-model="nsx.MaNSX" required>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label">Tên nhà sản xuất</label>
+                        <input type="text" class="form-control" ng-model="nsx.TenNSX" required>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="control-label">SDT</label>
+                        <input type="text" class="form-control" ng-model="nsx.SDT" required>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="control-label">Email: </label>
+                        <input type="text" class="form-control" ng-model="nsx.Email" value="0">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label class="control-label">Địa chỉ</label>
+                        <input type="text" class="form-control" ng-model="nsx.DiaChi" value="0">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-6">
+                    <button class="btn btn-default btn-icon icon-lg fa fa-arrow-left fa-lg" type="button" ui-sref="producer" ></button>
+                </div>
+                <div class="col-sm-6">
+                    <button class="btn btn-success btn-labeled fa fa-send fa-lg" style="float: right;" type="submit" ng-click="UpdateProducer()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

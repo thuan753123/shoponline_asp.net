@@ -1,0 +1,416 @@
+﻿
+@{
+    Layout = null;
+}
+@model LuonBenBan.Model.Models.Supplier
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@Model.Name</title>
+    <script type="text/javascript">
+        var easyauction = window.easyauction || {};
+        easyauction.base_url = '/index.php';
+        easyauction.langs = { "delete": "Delete", "cancel": "Cancel" };
+    </script>
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/pss_auction_style.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/css/custom/styleOrange.css" rel="stylesheet" />
+    <link href="~/Content/css/customize.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery.datetimepicker.css" rel="stylesheet" />
+    <link href="~/Content/css/fileupload.css" rel="stylesheet" />
+
+    <link href="~/Content/Big-Fonts-Awesome/css/fontawesome.min.css" rel="stylesheet" />
+    <style>
+        .payment-pro-highlighted {
+            background-color: #e8e8e8 !important;
+        }
+        .product-home-content {
+     border-top: 0; 
+     border-left: 0; 
+     border-bottom: 0;
+}
+    </style>
+    <link href="~/Content/css/tabs.css" rel="stylesheet" />
+    <link href="~/Content/css/menu.css" rel="stylesheet" />
+    <script src="~/Content/js/modernizr.js"></script>
+
+    <style>
+        .payment-pro-highlighted {
+            background-color: #fff000 !important;
+        }
+
+        li {
+            display: block;
+        }
+        .checked {
+    color: orange;
+}
+    </style>
+
+
+    <script src="~/Content/js/date.js"></script>
+
+    <script src="~/Scripts/mustache.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/JSController/LoadDataHome.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                    function () {
+                        // $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideDown("400");
+                        $(this).toggleClass('open');
+                    },
+                    function () {
+                        // $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true,true).slideUp("400");
+                        $(this).toggleClass('open');
+                    }
+            );
+        });</script>
+    <style>
+        body {
+            font: 11px/1.6 Verdana, Arial, sans-serif !important;
+        }
+
+        .navbar-inverse .navbar-nav > li > a {
+            color: #fffbfb !important;
+            font-size: 16px;
+        }
+
+        .auction-timeblock .auction-price {
+            bottom: 16px !important;
+            font-size: 20px !important;
+        }
+
+        .logo-site img {
+            max-height: 110px !important;
+            position: relative;
+            top: 0px;
+            margin-bottom: 10px;
+        }
+
+        .headtext1 {
+            font-family: 'Kaushan Script', cursive;
+            font-size: 50px;
+            color: #FFFFFF;
+            margin-top: 0;
+            margin-left: 0;
+            text-align: center;
+            display: block;
+            max-width: 500px;
+            margin-bottom: 20px;
+        }
+
+        img.center-block {
+            width: 100%;
+        }
+    </style>
+    <style>
+        .flip-clock-wrapper {
+            position: absolute;
+            margin: 0px;
+        }
+
+            .flip-clock-wrapper ul {
+                width: 22px;
+                height: 30px;
+            }
+
+                .flip-clock-wrapper ul li {
+                    line-height: 33px;
+                }
+
+                    .flip-clock-wrapper ul li a div div.inn {
+                        font-size: 22px;
+                    }
+
+                    .flip-clock-wrapper ul li a div.up:after {
+                        top: 15px;
+                        height: 1px;
+                    }
+
+        .flip-clock-dot.bottom {
+            top: 25px;
+        }
+
+        .flip-clock-dot.top {
+            top: 15px;
+        }
+
+        .flip-clock-dot {
+            height: 5px;
+            width: 5px;
+        }
+    </style>
+    <style>
+        .auction-time {
+            height: 42px;
+        }
+
+            .auction-time .panel-clock {
+                height: 100%;
+                width: 55%;
+                left: 33%;
+            }
+
+        .item-price-dollar-sign {
+            font-size: 12px;
+        }
+    </style>
+    <style>
+        .form-control {
+            padding: 0px;
+        }
+
+        .select-box.form-control {
+            border: none;
+        }
+
+        .navbar-right ._bag {
+            position: relative;
+        }
+
+            .navbar-right ._bag:hover {
+                text-decoration: none;
+            }
+
+            .navbar-right ._bag span {
+                top: -17px;
+                left: 10px;
+                position: absolute;
+                color: red;
+            }
+    </style>
+</head>
+<body>
+    <div id="fb-root"></div>
+    <script>
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1&appId=205528900113092&autoLogAppEvents=1';
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+    <div class="row">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-xs-11 p-l-2 p-t-2">
+                    <div class="container bootstrap snippet">
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <!--left col-->
+                                <div class="text-center">
+                                    <img src="@Model.Images" class="avatar img-circle img-thumbnail" alt="avatar">
+                                </div>
+                                <!--<div class="panel panel-default">
+                                    <div class="panel-heading">Trang xã hội <i class="fa fa-link fa-1x"></i></div>
+                                    <div class="panel-body"><a href="#">@Model.FaceBook</a></div>
+                                    <div class="panel-body"><a href="#">@Model.Twitter</a></div>
+                                </div>-->
+
+
+                                
+
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="col-md-12">
+                                    <h1 class="text-center">Shop @Model.Category - @Model.Name</h1>
+                                    <p class="text-center"> Xem thông tin và đánh giá về Shop</p>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <ul class="list-group">
+                                    <li class="list-group-item text-muted">Thông tin<i class="fa fa-dashboard fa-1x"></i></li>
+                                    <li class="list-group-item text-right">
+                                        <span class="pull-left"><strong>Rate</strong></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                        <span class="fa fa-star"></span>
+                                    </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong>Số sản phẩm</strong></span> @ViewBag.totalProduct</li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong>Số đơn hàng</strong></span>@ViewBag.totalBill</li>
+                                </ul>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Social Media</div>
+                                    <div class="panel-body">
+                                        <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="col-md-12">
+                                    <!--<div class="col-md-12">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+
+                <!-- Wrapper for slides
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="~/FileUpload/slideshow_image_1.jpg" />
+                    </div>
+
+                    <div class="item">
+                        <img src="~/FileUpload/slideshow_image_2 (1).jpg" />
+                    </div>
+                    <div class="item">
+                        <img src="~/FileUpload/slideshow_image_3.jpg" />
+                    </div>
+                </div>
+
+                <!-- Left and right controls
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>-->
+
+                                    <div class="col-md-12">
+                                        <div class="panel with-nav-tabs panel-primary">
+                                            <div class="panel-heading">
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active"><a href="#tab4primary" data-toggle="tab">Sản phẩm</a></li>
+                                                    <li><a href="#tab1primary" data-toggle="tab">Thông tin</a></li>
+                                                    <li><a href="#tab2primary" data-toggle="tab">Bản đồ</a></li>
+                                                    <li><a href="#tab3primary" data-toggle="tab">Đánh giá shop</a></li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="tab-content">
+                                                    <div class="tab-pane fade in active" id="tab4primary" style="padding: 0px;">
+                                                        <div>
+                                                            <b>Danh sách sản phẩm của cửa hàng</b>
+                                                        </div>
+                                                        <br />
+                                                        <div class="row" >
+                                                            <div class="product-home-content clearfix" id="NewProduct">
+
+                                                            </div>
+                                                            <div class="text-center" style="padding-top: 10px;">
+                                                                <button id="LoadMore" class="btn btn-success">Load More</button>
+                                                            </div>
+                                                            <script id="template-GetProductNew" type="x-tmpl-mustache">
+                                                                <div class="col-md-4  col-xs-12 no-padding kBz-qv-image" style="padding-right: 0px;padding-left: 0px;">
+                                                                    <div class="product-item">
+                                                                        <div class="pro-image">
+                                                                            <a href="/product/{{Alias}}-{{ProductID}}">
+                                                                                <img src="{{ProductImage}}" alt="{{ProductName}}" style="width:186px;height:208px;" class="img-responsive">
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="pro-content">
+                                                                            <h4 class="pro-name">
+                                                                                <a href="{{ProductImage}}">{{ProductName}}</a>
+                                                                            </h4>
+                                                                            <div class="pro-price">
+                                                                                <p class="price-new">{{Price}}</p>
+                                                                                <p class="price-old">
+                                                                                    <del>
+                                                                                        GNY: {{PriceSale}}
+                                                                                    </del>
+                                                                                </p>
+                                                                            </div>
+                                                                            <div class="link-detail"><span><a href="/product/{{Alias}}-{{ProductID}}">Chi tiết</a></span></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </script>
+                                                            <script>
+                                                                var prop = {
+                                                                    linkUrl: "/Products/GetGroupBySupplier?supplierId=@Model.ID",
+                                                                    templateID: "#template-GetProductNew",
+                                                                    elmentID: "#NewProduct"
+                                                                }
+                                                                ProductController3.constructor(1, 3, prop); // hàm khởi tạo 1: là số trang, 6: là số lượng bản ghi, prop là đối tượng
+                                                                ProductController3.init(); // khởi tạo trạng thái load ban đầu
+                                                                ProductController3.LoadMore("#LoadMore") // khi ấn Load More
+                                                            </script>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade in" id="tab1primary">
+                                                        <p>Tên cửa hàng: <b>@Model.Name</b></p>
+                                                        <p>Địa chỉ: <b>@Model.Location</b></p>
+                                                        <p>Email: <b>@Model.Email</b></p>
+                                                        <p>Số ĐT: <b>@Model.Phone</b></p>
+                                                        <p>Lĩnh vực kinh doanh: <b>@Model.Category</b></p>
+                                                        <p>Ngày thành lập: <b>@Model.EstablishDay.GetValueOrDefault().ToString("dd/MM/yyyy")</b></p>
+                                                        <p>Giới thiệu: <b>@Model.Description</b></p>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="tab2primary">
+                                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.739400057838!2d105.77730711437674!3d21.043110785990564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454cb662fbbc5%3A0x34d41e275dc31f7!2zTmfDtSAxIFBo4bqhbSBWxINuIMSQ4buTbmcsIE1haSBE4buLY2gsIEPhuqd1IEdp4bqleSwgSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1538044152738" width="721" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="tab3primary">
+                                                        <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="100%" data-numposts="5">
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Areas/Admin/lib/js/angular.js"></script>
+    <script src="~/Areas/Admin/lib/js/angular-ui-router.js"></script>
+
+    <script src="~/Scripts/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/index.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.mmenu.min.all.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.fancybox.pack.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.magnific-popup.min.js" type="text/javascript"></script>
+
+    <script src="~/Scripts/owl.carousel.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jgrowl.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/Scripts/main.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/json2.min.js"></script>
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+    <script src="~/vendor/toastr/toastr.min.js"></script>
+
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var star = document.getElementsByClassName("fa-star");
+            for(var i=0;i<@Model.Rate;i++)
+            {
+                star[i].className += " "+"checked"
+            }
+        });
+    </script>
+</body>
+</html>

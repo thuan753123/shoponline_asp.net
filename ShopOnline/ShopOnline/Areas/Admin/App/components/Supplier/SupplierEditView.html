@@ -1,0 +1,225 @@
+﻿<div id="page-title">
+    <h5 class="text-overflow">Sửa Cộng Tác</h5>
+    <!--Searchbox-->
+    <div class="searchbox">
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" placeholder="Search..">
+            <span class="input-group-btn">
+                <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+    <li><a ui-sref="home">Home</a></li>
+    <li><a ui-sref="product">Cộng Tác</a></li>
+    <li class="active">Chỉnh Sửa<li>
+</ol>
+<!--End breadcrumb-->
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content" ng-controller="supplierEditController">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="product_add#sp">Thông tin chính </a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="product_add#seo">Tối ưu SEO <span class="badge badge-purple">3</span></a>
+        </li>
+    </ul>
+    <!--Tabs Content-->
+    <div class="tab-content">
+        <div id="sp" class="tab-pane fade active in">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label">Tên cửa hàng</label>
+                                <input type="text" class="form-control" ng-model="supp.Name" ng-change="GetSeoTitle()" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Loại cửa hàng</label>
+                                <select class="form-control" ng-model="supp.Category" required>
+                                    <option ng-repeat="lch in LstStoreCategory" value="{{lch.MaNSX}}">{{lch.TenNSX}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Ngày thành lập</label>
+                                <div id="NgaySinh">
+                                    <div class="input-group date">
+                                        <input type="text" class="form-control" ng-model="supp.EstablishDay" id="ns">
+                                        <span class="input-group-addon"><i class="fa fa-calendar fa-lg"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Số điện thoại </label>
+                                <input type="text" class="form-control" ng-model="supp.Phone" value="0">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Email </label>
+                                <input type="text" class="form-control" ng-model="supp.Email" value="0">
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <div class="form-group ">
+                                <label class="control-label">Facebook</label>
+                                <input type="text" class="form-control" ng-model="supp.FaceBook" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Twister</label>
+                                <input type="number" class="form-control" ng-model="supp.Twister" />
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Số sao <b>{{supp.Rate|number:0}}</b><i class="fas fa-star"></i></label>
+                                <input type="number" class="form-control" ng-model="supp.Rate" value="0">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Lượt xem <b>{{supp.VisitCount|number:0}}</b> View</label>
+                                <input type="number" class="form-control" ng-model="supp.VisitCount" value="0">
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-3">
+                            <div class="form-group">
+                                <label class="control-label">Status</label>
+                                <div>
+                                    <input type="checkbox" ng-model="supp.States">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label">Mô tả</label>
+                                <textarea placeholder="Thông số" rows="3" class="form-control" ng-model="supp.Description" id="new_Specifications"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Avt Image</label>
+                                <button class="btn btn-success btn-labeled fa fa-upload fa-lg" ng-click="ChooseImage()">Chọn ảnh</button>
+                                <input type="text" class="form-control" ng-model="supp.Images" disabled />
+                                <img class="img img-thumbnail" ng-src="{{supp.Images}}" id="img1" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">More Image</label>
+                                <input type="number" id="moreImg" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label class="control-label">Khởi tạo</label>
+                                <input type="button" id="btnInitImg" ng-click="initMoreImg()" class="form-control btn btn-success" value="Xác nhận" />
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <input type="hidden" ng-model="MoreImages" />
+                        </div>
+                    </div>
+                    <div class="row" id="bodyMoreImg">
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button class="btn btn-default btn-icon icon-lg fa fa-arrow-left fa-lg" type="button" ui-sref="products"></button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-success btn-labeled fa fa-send fa-lg" style="float: right;" type="submit" ng-click="Update()" data-target="#demo-panel-ref" data-toggle="panel-overlay">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="seo" class="tab-pane fade">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label class="control-label">Meta Title</label>
+                                <input type="text" class="form-control" ng-model="supp.MetaTitle" required />
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                {{}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label class="control-label">Alias</label>
+                                <input type="text" class="form-control" ng-model="supp.Alias" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                {{}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label class="control-label">Meta description</label>
+                                <textarea type="text" class="form-control" ng-model="supp.MetaDescription"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                {{}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label class="control-label">Meta keywords</label>
+                                <textarea type="text" class="form-control" ng-model="supp.MetaKeywords"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                {{}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

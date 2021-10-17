@@ -1,0 +1,64 @@
+﻿@using ShopOnline.Models;
+@{
+    List<Product> lstPr = Product.Get() ?? new List<Product>() ;
+}
+<section class="main-product-home block-home">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-home-title clearfix">
+                    <h3>Sản phẩm mới</h3>
+                    <ul>
+                        <li><a href="#">Điện thoại</a></li>
+                        <li><a href="#">Máy tính bảng</a></li>
+                        <li><a href="#">Tivi</a></li>
+                        <li><a href="#">Điện tử</a></li>
+                        <li><a href="#">Điện lạnh</a></li>
+                        <li><a href="#">Đồ gia dụng</a></li>
+                    </ul>
+                </div>
+                <div class="product-home-content clearfix">
+                        @foreach (var item in lstPr.Take(8))
+                        {
+                            <div class="col-md-3 kBz-qv-image">
+                                <div class="item">
+                                    <div class="product-item">
+                                        <div class="pro-image">
+                                            <div class="sale-label sale-top-right">Sale</div>
+                                            <a href="/san-pham/@item.ProductID">
+                                                <img src="@item.Images" alt="@item.Name" class="img-responsive">
+                                            </a>
+                                        </div>
+                                        <div class="pro-content">
+                                            <h4 class="pro-name">
+                                                <a href="/san-pham/@item.ProductID">@item.Name</a>
+                                            </h4>
+                                            <div class="pro-price">
+                                                <p class="price-new">@item.Price.ToString("#,##0") VNĐ</p>
+                                                <p class="price-old">
+                                                    <del>
+                                                        GNY: @((item.Price + 500000).ToString("#,##0")) VNĐ
+                                                    </del>
+                                                </p>
+                                            </div>
+                                            <div class="link-detail">
+                                                <span>
+                                                    <a href="/san-pham/@item.ProductID">Chi tiết</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="kBz-qv-button-wrap" style="display: none !important;">
+                                    <a class="btn btn-success" href="#">Xem nhanh</a>
+                                </div>
+                            </div>
+                        }
+                </div>
+                <div class="text-center" style="padding-top: 10px;">
+                    <button id="LoadMore" class="btn btn-success">Load More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

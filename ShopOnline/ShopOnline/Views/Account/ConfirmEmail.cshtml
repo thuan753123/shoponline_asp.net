@@ -1,0 +1,85 @@
+﻿@using ShopMobile.Models
+@{
+    ViewBag.Title = "ComfirmEmail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{ 
+    Account acc = (Account)Session["User"];
+}
+
+<div class="main-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="/">Trang chủ</a></li>
+                    <li><a href="../Account/Register">Đăng kí</a></li>
+                    <li class="active">Xác thực Email</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-style form-login">
+                    <h3 class="form-heading">Xác thực tài khoản</h3>
+                    @if ((string)Session["ErrReg"] != ""&& (string)Session["ErrReg"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            <strong>Thông báo!</strong> @Session["ErrReg"]
+                        </div>
+                    }
+                    <p class="form-description">Nếu bạn có một tài khoản, xin vui lòng chuyển qua trang <a href="../Account/Login">đăng nhập.</a></p>
+                    @using (Html.BeginForm("Confirm", "Account", FormMethod.Post))
+                    {
+                        if (User != null)
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <p class="text-left">Mã xác thực*</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" value="" name="code">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="btn btn-success" type="submit">Xác thực</button>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <p class="text-left">Email*</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" value="" name="email">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <p class="text-left">Mã xác thực*</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" value="" name="code">
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <button class="btn btn-success" type="submit">Xác thực</button>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

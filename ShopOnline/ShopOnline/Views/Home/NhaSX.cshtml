@@ -1,0 +1,59 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="main-product-home block-home">
+    <div class="container" ng-controller="ProductController">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-home-title clearfix">
+                    <h3>Điện thoại</h3>
+                    <ul>
+                        <li ng-repeat="nsx in LstNhaSanXuat">
+                            <a href="../nha-san-xuat/{{nsx.MaNSX}}">{{nsx.TenNSX}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="product-home-content clearfix">
+                    <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+                        <div dir-paginate="sp in LstSanPhamByProducer|itemsPerPage:12" class="col-md-2 col-sm-4 col-xs-12 no-padding kBz-qv-image">
+                            <div class="product-item">
+                                <div class="pro-image">
+
+                                    <a href="../san-pham/{{sp.Metatitle}}-{{sp.MaSP}}">
+                                        <img src="..{{sp.link_anh1}}" alt="{{sp.Ten}}" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="pro-content">
+                                    <h4 class="pro-name">
+                                        <a href="../Product/Item?proid={{sp.MaSP}}">{{sp.Ten}}</a>
+                                    </h4>
+                                    <div class="pro-price">
+
+                                        <p class="price-new">{{sp.Gia| number:0}} VND</p>
+                                        <p class="price-old">
+                                            <del>
+                                            </del>
+                                        </p>
+                                    </div>
+                                    <div class="link-detail"><span><a href="../san-pham/{{sp.Metatitle}}-{{sp.MaSP}}">Chi tiết</a></span></div>
+                                </div>
+                            </div>
+                            <div class="kBz-qv-button-wrap" style="display: none !important;">
+                                <a class="kBz-qv-button" href="#kBz-qv-showqv" handle="xperia-z5-premium-dual-6201" style="font-family: Roboto; font-size: 16px; top: 50%; left: 50%; color: rgb(255, 255, 255); background-color: rgb(0, 159, 227);">Xem nhanh</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-9"></div>
+                <div class="col-md-3">
+                    <dir-pagination-controls max-size="15"
+                                             direction-links="true"
+                                             boundary-links="true">
+                    </dir-pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

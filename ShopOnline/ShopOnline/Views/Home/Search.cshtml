@@ -1,0 +1,64 @@
+﻿@using ShopMobile.Models;
+@{
+    var lst = ViewBag.lst;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+}
+<section class="main-product-home block-home">
+    <div class="container" ng-controller="ProductController">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-home-title clearfix">
+                    <h3>Điện thoại</h3>
+                    <ul>
+                        <li ng-repeat="nsx in LstNhaSanXuat">
+                            <a href="../nha-san-xuat/{{nsx.MaNSX}}">{{nsx.TenNSX}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="product-home-content clearfix">
+                    <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+
+                        @foreach (SanPham sp in lst)
+                        {<div class="col-md-2 col-sm-4 col-xs-12 no-padding kBz-qv-image">
+                            <div class="product-item">
+                                <div class="pro-image">
+                                    <a href="../san-pham/@sp.Metatitle-@sp.MaSP">
+                                        <img src="@sp.link_anh1" alt="@sp.Ten" class="img-responsive">
+                                    </a>
+                                </div>
+                                <div class="pro-content">
+                                    <h4 class="pro-name">
+                                        <a href="../san-pham/@sp.Metatitle-@sp.MaSP">@sp.Ten</a>
+                                    </h4>
+                                    <div class="pro-price">
+
+                                        <p class="price-new">@sp.Gia.ToString("#,##0") VNĐ</p>
+                                        <p class="price-old">
+                                            <del>
+                                            </del>
+                                        </p>
+                                    </div>
+                                    <div class="link-detail"><span><a href="../san-pham/@sp.Metatitle-@sp.MaSP">Chi tiết</a></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        }
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-9"></div>
+            <div class="col-md-3">
+                <dir-pagination-controls max-size="15"
+                                         direction-links="true"
+                                         boundary-links="true">
+                </dir-pagination-controls>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>

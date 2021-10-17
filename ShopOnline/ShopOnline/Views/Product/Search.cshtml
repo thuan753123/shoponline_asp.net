@@ -1,0 +1,91 @@
+﻿
+
+
+@{
+    ViewBag.Title = "Seacrh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="../../Home/Index">Trang chủ</a></li>
+                    <li class="active">Tìm kiếm</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-content" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="header-search">
+                    <form action="/search" method="get" id="header-search">
+                        <input type="text" id="header-search-input" placeholder="Tìm kiếm sản phẩm" value="@ViewBag.Keywords" name="query">
+                        <button id="header-search-btn" type="submit"><span class="fa fa-search"></span></button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-12">
+
+
+                <h1 class="collection-name">Kết quả tìm kiếm với từ khóa: "@ViewBag.Keywords"</h1>
+                <div class="product-list-grid clearfix" id="SearchProduct">
+
+                </div>
+                <div class="colletion-topbar">
+
+                    <div class="pull-right">
+
+                    </div>
+                </div>
+
+                <div class="text-center" style="padding-top: 10px;">
+                    <button id="LoadMoreSearch" class="btn btn-success">Load More</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script id="template-getSearch" type="x-tmpl-mustache">
+    <div class="col-md-2  col-xs-12 no-padding kBz-qv-image">
+        <div class="product-item">
+            <div class="pro-image">
+                <div class="sale-label sale-top-right">Sale</div>
+                <a href="/product/{{Alias}}-{{ProductID}}">
+                    <img src="{{ProductImage}}" alt="{{ProductName}}" class="img-responsive">
+                </a>
+            </div>
+            <div class="pro-content">
+                <h4 class="pro-name">
+                    <a href="{{ProductImage}}">{{ProductName}}</a>
+                </h4>
+                <div class="pro-price">
+                    <p class="price-new">{{Price}}</p>
+                    <p class="price-old">
+                        <del>
+                            GNY: {{PriceSale}}
+                        </del>
+                    </p>
+                </div>
+                <div class="link-detail"><span><a href="/product/{{Alias}}-{{ProductID}}">Chi tiết</a></span></div>
+            </div>
+        </div>
+    </div>
+</script>
+<script>
+    var propSearch = {
+        linkUrl: "/Products/GetSearch",
+        templateID: "#template-getSearch",
+        elmentID: "#SearchProduct",
+        keywords:"@ViewBag.Keywords",
+    }
+    SearchController.constructor(1, 6, propSearch); // hàm khởi tạo 1: là số trang, 6: là số lượng bản ghi, prop là đối tượng
+    SearchController.init(); // khởi tạo trạng thái load ban đầu
+    SearchController.LoadMore("#LoadMoreSearch") // khi ấn Load More
+</script>
+
+

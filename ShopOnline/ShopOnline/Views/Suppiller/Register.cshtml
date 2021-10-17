@@ -1,0 +1,240 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+
+    #img-upload {
+        width: 100%;
+    }
+
+    .form-group .file-upload {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .register-form .error {
+        color: #e00000;
+    }
+
+    .register-form .col-md-12 {
+        margin-top: 15px;
+    }
+</style>
+<script>
+    console.log('@Session["regErr"]')
+</script>
+<!-- Main Breadcrumb -->
+<div class="main-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="/">Trang chủ</a></li>
+                    <li class="active">Nâng cấp cộng tác</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Main Breadcrumb -->
+<!-- Main Content -->
+<div class="main-content" ng-controller="registerController" ng-init="txt_requied='Trường này là cần thiết!';txt_email='Email không hợp lệ!';txt_length='Độ dài tối thiểu 4 ký tự!'">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-login">
+                    <h3 class="form-heading">Nhập thông tin</h3>
+                    <form method="post" action="../../Suppiller/Register" name="registerForm" class="register-form">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <p class="text-left" style="font-size: 14px;font-weight: 600;">Tên cửa hàng*</p>
+                                    <input type="text" class="form-control" value="" name="name" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <p class="text-left" style="font-size: 14px;font-weight: 600;">Loại cửa hàng*</p>
+                                    <select name="category" class="form-control" style="width:70%;">
+                                        <option value="Công nghệ">Công nghệ</option>
+                                        <option value="Thiết bị gia dụng">Thiết bị gia dụng</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <p class="text-left" style="font-size: 14px;font-weight: 600;">Ngày thành lập*</p>
+                                    <input type="text" class="form-control" value="" name="establishday" required>
+                                    <div class="input-group-addon" data-provide="datepicker">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" style="clear:both;">
+                                    <p class="text-left" style="font-size: 14px;font-weight: 600;">Số điện thoại*</p>
+                                    <input type="text" class="form-control" value="" name="phone" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <p class="text-left" style="font-size: 14px;font-weight: 600;">Email*</p>
+                                    <input type="text" class="form-control" value="" name="email" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <p class="text-left" style="font-size: 14px;font-weight: 600;">Facebook</p>
+                                    <input type="text" class="form-control" value="" name="facebook" >
+                                </div>
+                                <div class="col-md-3">
+                                    <p class="text-left" style="font-size: 14px;font-weight: 600;">Twister</p>
+                                    <input type="text" class="form-control" value="" name="twister" >
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="text-left" style="font-size: 14px;font-weight: 600;">Địa chỉ*</p>
+                                    <input type="text" class="form-control" value="" name="location" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="text-left" style="font-size: 14px;font-weight: 600;">Ảnh đại diện</p>
+                                    <input type="file" class="form-control" value="" name="linkavt" >
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="text-left" style="font-size: 14px;font-weight: 600;">Mô tả</p>
+                                    <textarea style="height:150px" class="form-control" name="description"></textarea> 
+                                </div>
+                            </div>         
+                        </div>
+                        <div class="row" >
+                             <div class="col-md-12" >
+                                 <div class="col-md-12" style="background-color:#F0F2F4;">
+                                     <button class="btn-cart pull-right" type="submit">Gửi</button>
+                                 </div>
+                                     
+                             </div>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+<script>window.jQuery || document.write('<script src="~/Scripts/jquery-2.1.1.min.js"><\/script>')</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCHy7MUTk1eb8TB-Yn_G6z3MJVD_c0xxw"></script>
+<script src="~/Scripts/address-lookup.js"></script>
+<script>
+    $("#lookup").addressLookup({
+        "input": "#address-lookup"
+    })
+</script>
+<!--For get link image-->
+<!--For datepicker-->
+<script>
+        //$(document).ready(function () {
+        //    $('.datepicker').datepicker({
+        //        format: 'dd/mm/yyyy',
+        //        startDate: '-3d'
+        //    });
+    //});
+    $(document).ready(function () {
+
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        var app = angular.module('ShopMobile', []);
+        app.controller("registerController", function ($scope) {
+            $scope.equalPass = function () {
+                if ($scope.passwordAgain == $scope.password) {
+                    return true;
+                }
+                return false;
+            }
+            $scope.regexName = function () {
+                var regexYourname = /^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]+(([',. -][a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ])?[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]*)*$/;
+                if(regexYourname.test($scope.name))
+                {
+                    return true;
+                }
+                return false;
+            }
+            $scope.regexPass = function () {
+                var regexPass = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{4,}$/;
+                if (regexPass.test($scope.password))
+                {
+                    return true;
+                }
+                return false;
+            }
+            $scope.regexUserName = function () {
+                var regex = /^[a-zA-Z0-9]+$/;
+                if(regex.test($scope.username))
+                {
+                    return true;
+                }
+                return false;
+            }
+            $scope.regexImageFile = function () {
+                var regex = /\.(gif|jpg|jpeg|tiff|png)$/;
+                if (regex.test($("#imgInp").val()))
+                {
+                    return true;
+                }
+                return false;
+            }
+            $(document).ready(function () {
+                $(document).on('change', '.btn-file :file', function () {
+                    var input = $(this),
+                        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                    input.trigger('fileselect', [label]);
+                });
+
+                $('.btn-file :file').on('fileselect', function (event, label) {
+
+                    var input = $(this).parents('.input-group').find(':text'),
+                        log = label;
+
+                    if (input.length) {
+                        input.val(log);
+                    } else {
+                        if (log) alert(log);
+                    }
+
+                });
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#img-upload').attr('src', e.target.result);
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+                $("#imgInp").change(function () {
+                    readURL(this);
+                });
+            });
+        });
+    });
+</script>
+

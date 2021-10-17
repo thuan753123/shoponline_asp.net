@@ -1,0 +1,251 @@
+﻿<div id="page-title">
+    <h5 class="text-overflow">Thêm sản phẩm</h5>
+    <!--Searchbox-->
+    <div class="searchbox">
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" placeholder="Search..">
+            <span class="input-group-btn">
+                <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+    <li><a ui-sref="home">Home</a></li>
+    <li><a ui-sref="product">Sản Phẩm</a></li>
+    <li class="active">Thêm Sản Phẩm</li>
+</ol>
+<!--End breadcrumb-->
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content" ng-controller="productAddController">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="product_add#sp">Sản Phẩm chính </a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="product_add#seo">Tối ưu SEO <span class="badge badge-purple">3</span></a>
+        </li>
+    </ul>
+    <!--Tabs Content-->
+    <div class="tab-content">
+        <div id="sp" class="tab-pane fade active in">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label">Tên sản phẩm</label>
+                                <input type="text" class="form-control" ng-model="pro.ProductName" ng-change="GetSeoTitle()" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Mã nhà sản xuất</label>
+                                <select class="form-control" ng-model="pro.CategoryID" required>
+                                    <option ng-repeat="nsx in LstNhaSanXuat" value="{{nsx.MaNSX}}">{{nsx.TenNSX}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Bảo Hành(tháng)</label>
+                                <input type="number" class="form-control" ng-model="pro.Warranty" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Giá Thành: <b>{{pro.Price|number:0}}</b> VNĐ</label>
+                                <input type="number" class="form-control" ng-model="pro.Price" value="0">
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Giá KM: <b>{{pro.PromotionPrice|number:0}}</b> VNĐ</label>
+                                <input type="number" class="form-control" ng-model="pro.PromotionPrice" value="0">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 col-xs-12">
+                            <div class="form-group ">
+                                <label class="control-label">ProductCode</label>
+                                <input type="text" class="form-control" ng-model="pro.ProductCode" />
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Quantity</label>
+                                <input type="number" class="form-control" ng-model="pro.Quantity" />
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-3">
+                            <div class="form-group">
+                                <label class="control-label">Status</label>
+                                <div>
+                                    <input type="checkbox" ng-model="pro.Status">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-3">
+                            <div class="form-group">
+                                <label class="control-label">Top Hot</label>
+                                <div>
+                                    <input type="checkbox" ng-model="pro.TopHot">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-3">
+                            <div class="form-group">
+                                <label class="control-label">New</label>
+                                <div>
+                                    <input type="checkbox" ng-model="pro.New">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-3">
+                            <div class="form-group">
+                                <label class="control-label">Sale</label>
+                                <div>
+                                    <input type="checkbox" ng-model="pro.Sale">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label class="control-label">Giá VAT</label>
+                                <div>
+                                    <input type="checkbox" ng-model="pro.IncludeVAT">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label">Thông số sản phẩm</label>
+                                <textarea placeholder="Thông số" rows="3" class="form-control" ng-model="pro.Specifications" id="new_Specifications"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label">Mô tả sản phẩm</label>
+                                <textarea placeholder="Mô tả san phẩm" rows="3" class="form-control" ng-model="pro.Description" id="new_Detail"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Product Image</label>
+                                <button class="btn btn-success btn-labeled fa fa-upload fa-lg" ng-click="ChooseImage()">Chọn ảnh</button>
+                                <input type="text" class="form-control" ng-model="pro.ProductImage" disabled />
+                                <img class="img img-thumbnail" ng-src="{{pro.ProductImage}}" id="img1" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">More Image</label>
+                                <input type="number" id="moreImg" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label class="control-label">Khởi tạo</label>
+                                <input type="button" id="btnInitImg" ng-click="initMoreImg()" class="form-control btn btn-success" value="Xác nhận" />
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <input type="hidden" ng-model="pro.MoreImages" />
+                        </div>
+                    </div>
+                    <div class="row" id="bodyMoreImg">
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button class="btn btn-default btn-icon icon-lg fa fa-arrow-left fa-lg" type="button" ui-sref="products"></button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-success btn-labeled fa fa-send fa-lg" style="float: right;" type="submit" ng-click="Create()" data-target="#demo-panel-ref">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="seo" class="tab-pane fade">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label class="control-label">Meta Title</label>
+                                <input type="text" class="form-control" ng-model="pro.MetaTitle" required />
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                {{}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label class="control-label">Alias</label>
+                                <input type="text" class="form-control" ng-model="pro.Alias" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                {{}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label class="control-label">Meta description</label>
+                                <textarea type="text" class="form-control" ng-model="pro.MetaDescriptions"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                {{}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label class="control-label">Meta keywords</label>
+                                <textarea type="text" class="form-control" ng-model="pro.MetaKeywords"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                {{}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

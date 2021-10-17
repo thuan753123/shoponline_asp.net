@@ -1,0 +1,128 @@
+﻿@using ShopOnline.Models;
+@{
+    List<Product> lstPr = Product.Get() ?? new List<Product>();
+}
+<style>
+    .slide-next {
+        left: 0;
+        position: absolute;
+        top: 50%;
+        font-size: 20px;
+        background: rgba(215, 157, 157, 0.34);
+        padding: 10px;
+    }
+
+    .slide-prev {
+        right: 0;
+        position: absolute;
+        top: 50%;
+        font-size: 20px;
+        background: rgba(215, 157, 157, 0.34);
+        padding: 10px;
+    }
+
+    .title-header {
+        margin: 25px 0 10px;
+        font-size: 17px;
+        font-weight: 500;
+        color: #6f6a6a;
+    }
+
+    .fixed-top {
+        position: relative;
+    }
+
+        .fixed-top > .row {
+            margin: 0;
+        }
+</style>
+<section class="main-best-seller block-home">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="best-seller-title clearfix">
+                    <h3>Sản phẩm bán chạy</h3>
+                    <ul>
+                        <li><a href="#/dien-thoai">Điện thoại</a></li>
+                        <li><a href="#/tablet">Tablet</a></li>
+                        <li><a href="#/phu-kien">Phụ kiện</a></li>
+                        <li><a href="#/tivi">Tivi</a></li>
+                        <li><a href="#/dien-lanh">Điện lạnh</a></li>
+                        <li><a href="#/do-gia-dung">Đồ gia dụng</a></li>
+                    </ul>
+                </div>
+                <div class="best-seller-content">
+                    <div class="owl-carousel owl-carousel-data" id="SellingProduct">
+                        @foreach (var item in lstPr)
+                        {
+                            <div class="owl-item kBz-qv-image">
+                                <div class="item">
+                                    <div class="product-item">
+                                        <div class="pro-image">
+                                            <div class="sale-label sale-top-right">Sale</div>
+                                            <a href="/san-pham/@item.ProductID">
+                                                <img src="@item.Images" alt="@item.Name" class="img-responsive">
+                                            </a>
+                                        </div>
+                                        <div class="pro-content">
+                                            <h4 class="pro-name">
+                                                <a href="/san-pham/@item.ProductID">@item.Name</a>
+                                            </h4>
+                                            <div class="pro-price">
+                                                <p class="price-new">@item.Price.ToString("#,##0") VNĐ</p>
+                                                <p class="price-old">
+                                                    <del>
+                                                        GNY: @((item.Price+500000).ToString("#,##0")) VNĐ
+                                                    </del>
+                                                </p>
+                                            </div>
+                                            <div class="link-detail">
+                                                <span>
+                                                    <a href="/san-pham/@item.ProductID">Chi tiết</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="kBz-qv-button-wrap" style="display: none !important;">
+                                    <a class="btn btn-success" href="#">Xem nhanh</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function initSlide() {
+        $("#SellingProduct").owlCarousel({
+            loop: true,
+            margin: 30,
+            responsiveClass: true,
+            autoplay: true,
+            items: 6, //10 items above 1000px browser width
+            dots: false,
+            nav: true,
+            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+            responsive: {
+                0: {
+                    items: 2
+                },
+                600: {
+                    items: 4
+                },
+                1000: {
+                    items: 6
+                }
+            }
+        });
+    }
+    $(document).ready(function () {
+        initSlide();
+    });
+
+    //ProductController.LoadMore(null) // khi ấn Load More
+</script>

@@ -1,0 +1,256 @@
+﻿@model  ShopOnline.Models.Product
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.title = Model.Name;
+}
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = '/Scripts/sdk.js';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<link href="~/vendor/xzoom/xzoom.css" rel="stylesheet" />
+<div class="main-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="/">Trang chủ</a></li>
+
+                    <li><a href="/product"></a>Sản Phẩm</li>
+
+                    <li class="active">@Model.Name </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="pd-top">
+                    <div class="col-md-6">
+                        <div class="prod-image clearfix">
+                            <div class="col-md-10 col-sm-10 col-xs-12">
+                                <img class="xzoom img-responsive" src="@Model.Images" xoriginal="@Model.Images" />
+                            </div>
+                            <div class="xzoom-thumbs col-md-2 col-sm-2 hidden-xs no-padding">
+                                <!-- Thumbnails -->
+                                <a href="/img/item-02.jpg">
+                                    <img class="xzoom-gallery img-responsive" src="/img/item-02.jpg">
+                                </a>
+                                <a href="/img/item-03.jpg">
+                                    <img class="xzoom-gallery img-responsive" src="/img/item-03.jpg">
+                                </a>
+                                <a href="/img/item-04.jpg">
+                                    <img class="xzoom-gallery img-responsive" src="/img/item-04.jpg">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h1 itemprop="name" class="pd-name">@Model.Name</h1>
+                        <div class="prod-price clearfix">
+                            <b>Giá: </b> <span class="price pd-price">@Model.Price.ToString("#,##0") VNĐ</span>
+                            <span class="availability in-stock pull-right">Còn hàng</span>
+                        </div>
+                        <div class="share">
+                        </div>
+                        <div class="pd-description-mini">
+                            <p><strong>Nhà cung cấp:</strong><a href="/cua-hang-ClickBuy-5">ClickBuy</a> </p>
+                            <p><strong>Xuất xứ:</strong>Trung Quốc</p>
+                            <p><strong>Bảo hành:</strong> 24 Tháng</p>
+                        </div>
+                        <div class="pd-form">
+
+                            <div class="selector-wrapper clearfix">
+                                <label for="product-select-option-0">Bộ nhớ trong</label>
+                                <select class="single-option-selector" data-option="option1" id="product-select-option-0">
+                                    <option value="12kg">4 GB</option>
+                                </select>
+                            </div>
+                            <div class="selector-wrapper clearfix">
+                                <label for="product-select-option-1">Màu sắc</label>
+                                <select class="single-option-selector" data-option="option2" id="product-select-option-1">
+                                    <option value="Trắng">Trắng</option>
+                                    <option value="Xanh">Xanh</option>
+                                </select>
+                            </div>
+                            <input type="number" title="Qty" value="1" maxlength="12" id="qty" name="SoLuong" class="input-text qty">
+                            <button type="button" id="add-to-cart" class="product-atc">Đặt hàng</button>
+                            <div class="btn-call hidden-md hidden-lg hidden-sm"><a class="tel:0169.8454.346">0973.642.632</a></div>
+
+                            <div class="md-discount-box-inform" id="md-discount-box-inform"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pd-bottom">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs pd-nav">
+                                <li role="presentation" class="active">
+                                    <a href="#pd-thong-tin" aria-controls="pd-thong-tin" role="tab" data-toggle="tab">
+                                        Thông tin sản phẩm
+                                    </a>
+                                </li>
+
+                                <li role="presentation">
+                                    <a href="#pd-dac-diem" aria-controls="pd-dac-diem" role="tab" data-toggle="tab">Thông tin thanh toán</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#pd-danh-gia" aria-controls="pd-danh-gia" role="tab" data-toggle="tab">Chính sách vận chuyển</a>
+                                </li>
+                                <li role="presentation">
+                                    <a href="#pd-comment" aria-controls="pd-comment" role="tab" data-toggle="tab">Bình Luận sản phẩm</a>
+                                </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="pd-thong-tin">
+                                    <p><strong>Kiểu dáng hiện đại</strong></p>
+                                    @*<p>@Html.Raw()</p>*@
+                                </div>
+                                @Html.Partial("_PartialItemGuiFaq")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pd-tags">
+                    <i class="fa fa-tags"></i> <b>Tags:</b>
+                    <a href="/san-pham/@Model.ProductID" title="@Model.Name">@Model.Name</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="sidebar-hotline block">
+                    <h2 class="hotline-heading"><i class="fa fa-caret-right"></i> Hỗ trợ trực tuyến</h2>
+                    <div class="hotline-content">
+                        <div class="hotline-item">
+                            <h4><i class="fa fa-life-ring"></i> Kinh doanh Hà Nội</h4>
+                            <div class="hot_sup">
+                                <a href="https://fb.com/100004574107394">
+                                    <img src="~/img/facebook-button.png" width="65">
+                                </a>
+                            </div>
+                            <p>Mobile: 0973.642.632</p>
+                            <p>Tel: 04.xxxx.xxxx</p>
+                        </div>
+                        <div class="hotline-item">
+                            <h4><i class="fa fa-life-ring"></i> Kinh doanh Hồ Chí Minh</h4>
+                            <div class="hot_sup">
+                                <a href="https://fb.com/100004574107394">
+                                    <img src="~/img/facebook-button.png" width="65">
+                                </a>
+                            </div>
+                            <p>Mobile: 0973.642.632</p>
+                            <p>Tel: 04.xxxx.xxxx</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-banner block">
+                    <a href="##"><img src="~/img/big-154340-may-giat-say-electrolux-eww14012-2-9bc4a446-e2aa-42ed-b82e-9dd7709d791e.jpg"></a>
+                </div>
+
+                <div class="blog-new block">
+                    <h2 class="blog-heading"><i class="fa fa-caret-right"></i> Có thể bạn quan tâm</h2>
+                    <div class="blog-new-content">
+
+                        <div class="blog-new-name">
+                            <a href="#/tong-hop-kinh-nghiem-lua-chon-loi-khuyen-ve-dtdd-phu-kien">Tổng hợp kinh nghiệm lựa chọn - lời khuyên về ĐTDĐ, phụ kiện</a>
+                            <p class="blog-info">Đình Phúc | 05/ 05/ 2018</p>
+                        </div>
+
+                        <div class="blog-new-name">
+                            <a href="#/so-sanh-camera-galaxy-s7-lg-v10">So sánh Camera: Galaxy S7 &amp; LG V10</a>
+                            <p class="blog-info">Đình Phúc | 05/ 05/ 2018</p>
+                        </div>
+
+                        <div class="blog-new-name">
+                            <a href="#/di-lan-bien-voi-camera-chong-nuoc-20-met-ricoh-wg-m2">Đi lặn biển với camera chống nước 20 mét Ricoh WG-M2</a>
+                            <p class="blog-info">Đình Phúc | 05/ 05/ 2018</p>
+                        </div>
+
+                        <div class="blog-new-name">
+                            <a href="#/bai-viet-mau">Movado Bold Motion: đồng hồ thông minh báo hiệu bằng đèn LED</a>
+                            <p class="blog-info">Đình Phúc | 29/ 05/ 2018</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade success-popup" id="SuccessMD" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title text-center" id="myModalLabel">Thank You !</h4>
+            </div>
+            <div class="modal-body text-center">
+                <i class="fa fa-check-square-o" style="font-size: 50px;color: green;"></i>
+                <p class="lead">Sản phẩm đã được đưa vào giỏ hàng</p>
+                <a href="/cart/index" class="btn btn-success">Đến giỏ hàng</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade success-popup" id="ErrMD" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title text-center" id="myModalLabel">Thank You !</h4>
+            </div>
+            <div class="modal-body text-center">
+                <i class="fa exclamation-triangle" style="font-size: 50px;color: green;"></i>
+                <p class="lead">Lỗi thêm sản phẩm</p>
+                <a href="/cart/index" class="btn btn-success">Đến giỏ hàng</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery.min.js"></script>
+<script src="~/vendor/xzoom/xzoom.min.js"></script>
+<script>
+    /* calling script */
+    $(".xzoom, .xzoom-gallery").xzoom({ tint: '#333', Xoffset: 15 });
+</script>
+
+<script>
+
+    $("#add-to-cart").click(function () {
+
+        var sl = $("#qty").val();
+        $.ajax({
+            type: 'GET',
+            url: '/cart/AddToCart',
+            dataType: 'json',
+            data: { id: @Model.ProductID, SoLuong: sl },
+            success: function (response) {
+                if (response.status) {
+                    $("#my-cart").text(response.sluong);
+                    $('#SuccessMD').modal('show'); 
+                }
+                else {
+                    $('#ErrMD').modal('show'); 
+                }
+
+            }
+        });
+
+    });
+</script>

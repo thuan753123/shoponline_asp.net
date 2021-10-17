@@ -1,0 +1,274 @@
+﻿@using ShopOnline.Models;
+@{
+    Cart gio = (Cart)Session["cart"] ?? new Cart();
+    Customer us = (Customer)Session["us"];
+}
+<header class="header">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <ul class="header-top-right">
+                        <li class="box-n"><i class="fa fa-shopping-cart"></i> <a href="../Cart" id="my-cart" class="cart-icon"><span id="my-cart">@gio.getCount()</span> sản phẩm</a></li>
+                        @if (us == null)
+                        {
+                            <li class="box-n"><a href="../Account/Login"><i class="fa fa-user"></i> Đăng nhập</a></li>
+                            <p>|</p>
+                            <li class="box-n"><a href="../Account/Register"><i class="fa fa-user-plus"></i> Đăng ký</a></li>
+                        }
+                        else
+                        {
+                            if (us.IsSupplier)
+                            {
+                                <li class="box-n" style="float:left">
+                                    <a href="/supplier">
+                                    <i class="fa fa-home"></i> Kênh bán hàng</a>
+                                </li>
+
+                            }
+                            else
+                            {
+                                <li class="box-n" style="float:left">
+                                    <a href="/suppiller/"><i class="fa fa-user-plus"></i> Đăng ký bán hàng</a>
+                                </li>
+                            }
+
+                            <li class="box-n">Xin chào:&nbsp <a href="../Account/"><i class="fa fa-user"></i> @us.UserName</a></li>
+                            <p>|</p>
+                            <li class="box-n">
+                                <a href="@Url.Action("Logout", "Account")">
+                                    <span class="glyphicon glyphicon-log-in"></span> Đăng xuất
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <a href="/" class="header-logo">
+                        <img src="~/img/logo.png" alt="ShopMobile">
+                    </a>
+                </div>
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <div class="header-content-right">
+                        <div class="row">
+                            <div class="col-md-7 col-sm-12 col-xs-12">
+                                <div class="header-search">
+                                    <form action="../../Product/Search" method="post" id="header-search">
+                                        <input type="text" id="header-search-input" placeholder="Tìm kiếm tên sản phẩm" value="" name="TenSP">
+                                        <button id="header-search-btn" type="submit"><span>Tìm</span></button>
+                                    </form>
+                                </div>
+                                <div class="hidden-lg hidden-md col-sm-2 col-xs-2">
+                                    <div class="header-menu-btn">
+                                        <a href="#menu"><span class="fa fa-bars fa-2x"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6 col-xs-6 no-padding">
+                                <div class="header-hotline">
+                                    Hotline: <strong>0944.922.247</strong>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-sm-4 col-xs-4">
+                                <div class="header-cart">
+                                    <a href="../Cart" class="cart-icon">@gio.getCount() sản phẩm</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-nav hidden-sm hidden-xs">
+                        <div class="main-nav-content">
+                            <ul>
+
+                                <li class="active">
+                                    <a href="/">Trang chủ</a>
+                                </li>
+
+                                <li class="">
+                                    <a href="#/collections/all">Sản phẩm</a>
+                                    <ul class="submenu">
+
+                                        <li class="menu-sub-item">
+                                            <a href="#/collections/all" class="menu-sub-link">Tất cả sản phẩm</a>
+                                            <ul>
+
+                                                <li class="">
+                                                    <a href="#/dien-thoai">Điện thoại</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/tablet">Tablet</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/tivi">Tivi</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/dien-lanh">Điện lạnh</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/may-anh">Máy ảnh</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/phu-kien-cong-nghe">Phụ kiện công nghệ</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="menu-sub-item">
+                                            <a href="#/dien-thoai" class="menu-sub-link">Điện thoại</a>
+                                            <ul></ul>
+                                        </li>
+
+                                        <li class="menu-sub-item">
+                                            <a href="#/tablet" class="menu-sub-link">Tablet</a>
+                                            <ul>
+
+                                                <li class="">
+                                                    <a href="#/tablet">Acer</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/tablet">Asus</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/tablet">Apple</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/tablet">Lenovo</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="menu-sub-item">
+                                            <a href="#/tivi" class="menu-sub-link">Tivi</a>
+                                            <ul>
+
+                                                <li class="">
+                                                    <a href="#/tivi">Sam sung</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/tivi">Sony</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/tivi">Panasonic</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/tivi">Bravia</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="menu-sub-item">
+                                            <a href="#/dien-lanh" class="menu-sub-link">Điện lạnh</a>
+                                            <ul>
+
+                                                <li class="">
+                                                    <a href="#/dien-lanh">Điều hòa</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/dien-lanh">Máy Giặt</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/dien-lanh">Bình nước nóng</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/dien-lanh">Cây lọc nước</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="menu-sub-item">
+                                            <a href="#/may-anh" class="menu-sub-link">Máy ảnh</a>
+                                            <ul>
+
+                                                <li class="">
+                                                    <a href="#/may-anh">Canon</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/may-anh">Sony</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/may-anh">Nikon</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/may-anh">Fujitsu</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="menu-sub-item">
+                                            <a href="#/phu-kien-cong-nghe" class="menu-sub-link">Phụ kiện công nghệ</a>
+                                            <ul>
+
+                                                <li class="">
+                                                    <a href="#/dien-thoai">Điện thoại</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/may-anh">Máy ảnh</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/tablet">Tablet</a>
+                                                </li>
+
+                                                <li class="">
+                                                    <a href="#/phu-kien-cong-nghe">Camera</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="">
+                                            <a href="#/dien-lanh">Đồ gia dụng</a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="">
+                                    <a href="../tin-tuc">Tin tức</a>
+                                </li>
+
+                                <li class="">
+                                    <a href="#">Giới thiệu</a>
+                                </li>
+
+                                <li class="">
+                                    <a href="#">Tư vấn</a>
+                                </li>
+
+                                <li class="">
+                                    <a href="#">Tuyển dụng</a>
+                                </li>
+
+                                <li class="">
+                                    <a href="../Contact">Liên hệ</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

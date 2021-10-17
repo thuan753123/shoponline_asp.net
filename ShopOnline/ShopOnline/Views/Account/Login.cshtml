@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Đăng Nhập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Main Breadcrumb -->
+<div class="main-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="/">Trang chủ</a></li>
+                    <li class="active">Đăng nhập</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Main Breadcrumb -->
+<!-- Main Content -->
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-style form-login">
+                    <h3 class="form-heading">Đăng nhập</h3>
+                    <p class="form-description">Nếu bạn có một tài khoản, xin vui lòng đăng nhập.</p>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <p>Email*</p>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" value="" id="txtUsername" name="key">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <p>Password*</p>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="password" value="" id="txtPassword" name="password">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-10">
+                            <p><a href="../Account/Register">Đăng ký</a></p>
+                            <button class="btn btn-success" id="btnLogin">Đăng nhập</button>
+                        </div>
+                    </div>
+                    <input name="returnUrl" type="hidden" value="../Cart/checkout">
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
+                <div class="form-style form-login">
+                    @using (Html.BeginForm("Recover", "Account", FormMethod.Post))
+                    {
+                        <h3 class="form-heading">Quên mật khẩu</h3>
+                        <p class="form-description">Bạn đã có một tài khoản nhưng không nhớ mật khẩu.</p>
+                        <p>
+                            Hãy điền Email xuống phía dưới và nhận thông tin qua Email để có thể lấy lại mật khẩu.
+                        </p>
+                        <p>Email</p>
+                            <input type="email" value="" name="email">
+                            <button class="btn btn-primary" type="submit">Gửi thông tin</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<!-- End Main Content -->
+<script>
+    $(document).ready(function () {
+        $('#btnLogin').click(function () {
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:9999/Account/CheckLogin',
+                dataType: 'json',
+                data: { key: $('#txtUsername').val(), password: $('#txtPassword').val(), },
+                // When the request completes successfully, save the
+                // access token in the browser session storage and
+                // redirect the user to Data.html page. We do not have
+                // this page yet. So please add it to the
+                // EmployeeService project before running it
+                success: function (response) {
+                    //sessionStorage.setItem("accessToken", response.access_token);
+                    //window.location.href = "Data.html";
+                    if (response.status)
+                    {
+                        toastr.success(response.mess);
+                        setTimeout(function () {
+                            window.location.href = "/";
+                        }, 3000);
+                      
+                    } else {
+                        toastr.error(response.mess);
+                    }
+                   
+                },
+                // Display errors if any in the Bootstrap alert <div>
+                error: function (jqXHR) {
+                    toastr.error(jqXHR.responseText);
+                   
+                }
+            });
+        });
+    });
+</script>

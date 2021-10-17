@@ -1,0 +1,56 @@
+﻿<section class="main-product-home block-home">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-home-title clearfix">
+                    <h3>Tin Tức</h3>
+                    <ul>
+                        <li><a href="#">Tin khuyến mãi</a></li>
+                        <li><a href="#">Tin mới</a></li>
+                        <li><a href="#">Xu hướng</a></li>
+                        <li><a href="#">Giải trí</a></li>
+                        <li><a href="#">Đánh giá - tư vấn</a></li>
+                        <li><a href="#">Tin công nghệ</a></li>
+                    </ul>
+                </div>
+                <div class="product-home-content clearfix" id="ContainerArticle">
+                    <br />
+                </div>
+                <div class="text-center" style="padding-top: 10px;">
+                    <button id="LoadMoreArticle" class="btn btn-success">Load More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script id="template-GetArticles" type="x-tmpl-mustache">
+    <div class="col-md-6">
+        <div class="col-md-5 col-sm-5 col-xs-12 no-padding">
+            <div class="blog-img">
+                <a href="/tin-tuc-{{Alias}}-{{ArticleID}}">
+
+                    <img src="{{ArticleImage}}" alt="{{ArticleTitle}}" class="img-responsive">
+                </a>
+            </div>
+        </div>
+        <div class="col-md-7 col-sm-7 col-xs-12 no-padding-right">
+            <div class="more-info">
+                <h3><a href="/tin-tuc-{{Alias}}-{{ArticleID}}">{{ArticleTitle}}</a></h3>
+                <p class="blog-description"> {{ArticleDescription}}</p>
+                <p class="viewmore"><a href="/tin-tuc-{{Alias}}-{{ArticleID}}">Chi tiết <i class="fa fa-angle-right"></i> </a></p>
+            </div>
+        </div>
+        </div>
+</script>
+
+<script>
+    var ArticleProp = {
+        linkUrl: "/Articles/Get",
+        templateID: "#template-GetArticles",
+        elmentID: "#ContainerArticle"
+    }
+    ArticleController.constructor(1, 6, ArticleProp); // hàm khởi tạo 1: là số trang, 6: là số lượng bản ghi, prop là đối tượng
+    ArticleController.init(); // khởi tạo trạng thái load ban đầu
+    ArticleController.LoadMore("#LoadMoreArticle"); // khi ấn Load More
+</script>

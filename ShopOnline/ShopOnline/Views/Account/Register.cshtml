@@ -1,0 +1,363 @@
+﻿@{
+    ViewBag.Title = "Đăng kí";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+#img-upload{
+    width: 100%;
+}
+.form-group  .file-upload{
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.register-form .error{
+    color:#e00000;
+}
+.register-form .col-md-12{
+    margin-top:15px;
+}
+</style>
+<script>
+    console.log('@Session["regErr"]')
+</script>
+<!-- Main Breadcrumb -->
+<div class="main-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="/">Trang chủ</a></li>
+                    <li class="active">Đăng Kí</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Main Breadcrumb -->
+<!-- Main Content -->
+<div class="main-content"  ng-controller="registerController"  ng-init="txt_requied='Trường này là cần thiết!';txt_email='Email không hợp lệ!';txt_length='Độ dài tối thiểu 4 ký tự!'">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-style form-login">
+                    <h3 class="form-heading">Đăng ký tài khoản</h3>
+                    @if ((string)Session["regErrUser"] != ""&& Session["regErrUser"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            <strong>Thông báo!</strong> @Session["regErrUser"]
+                        </div>
+                    }
+                    <p class="form-description">Nếu bạn đã có một tài khoản, xin vui lòng chuyển qua trang <a href="../Account/Login">đăng nhập.</a></p>
+                    <form method="post" action="../../Account/CreateAccount"  enctype="multipart/form-data"  name="registerForm" class="register-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <p class="text-left">Tên đăng nhập*</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" value="" ng-model="username" name="UserName" ng-change="checkUserName=regexUserName()" required>
+                                            <br><span class="error" ng-show="registerForm.username.$touched && registerForm.username.$error.required" ng-bind="txt_requied"></span>
+                                            @*<span class="error" ng-show="registerForm.username.$touched && registerForm.username.$error.required!=true&&checkUserName==false" >Tên tài khoản không hợp lệ!</span>*@
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <p class="text-left">Mật khẩu*</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="password" value="" name="Password" ng-model="password" ng-change="checkPass=regexPass()" required minlength="4">
+                                            <br><span class="error" ng-show="registerForm.password.$touched && registerForm.password.$error.required" ng-bind="txt_requied"></span>
+                                            @*<span class="error" ng-show="registerForm.password.$touched && registerForm.password.$error.minlength" ng-bind="txt_length"></span>
+                                            <span class="error" ng-show="registerForm.password.$touched && registerForm.password.$error.required!=true&&checkPass==false" >Mật khẩu phải chứa ký tự và số!</span>*@
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <p class="text-left">Nhập lại mật khẩu*</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="password" value="" name="passwordAgain" ng-model="passwordAgain" ng-change="confirmPass=equalPass()" required minlength="4"/>
+                                            <br><span class="error" ng-show="registerForm.passwordAgain.$touched && registerForm.passwordAgain.$error.required" ng-bind="txt_requied"></span>
+                                            @*<span class="error" ng-show="registerForm.passwordAgain.$touched && registerForm.passwordAgain.$error.minlength" ng-bind="txt_length"></span>
+                                            <span class="error" ng-show="registerForm.passwordAgain.$touched&& confirmPass==false&&registerForm.passwordAgain.$error.required!=true">Mật khẩu không khớp!</span>*@
+                                        </div>
+                                    </div>
+                                    @*<div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-md-4">
+                                                <p class="text-left">Avatar</p>
+                                            </div>
+                                            <div class="input-group col-md-8 file-upload">
+                                                <span class="input-group-btn">
+                                                    <span class="btn btn-default btn-file">
+                                                        Browse… <input type="file" id="imgInp" value="" name="LinkAvt" >
+                                                    </span>                                                    
+                                                </span>
+                                                <input type="text" class="form-control"   readonly >
+                                            </div>
+                                            <br>
+                                            <div class="col-md-4">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <img id='img-upload' />
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Upload Image</label>
+                                            <div class="input-group">
+                                                <span class="input-group-btn">
+                                                    <span class="btn btn-default btn-file">
+                                                        Browse… <input type="file" id="imgInp" name="fileUpload" accept="image/*">
+                                                    </span>
+                                                </span>
+                                                <input type="text" class="form-control" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <img id='img-upload' />
+                                    </div>
+                                    <div class="col-md-6">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <p class="text-left">Họ tên*</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="text" value="" name="Name" ng-model="name" ng-change="checkName=regexName()" required>
+                                            <br>@*<span class="error" ng-show="registerForm.name.$touched && registerForm.name.$error.required" ng-bind="txt_requied"></span>
+                                            <span class="error" ng-show="registerForm.name.$touched && registerForm.name.$error.required!=true&&checkName==false">Họ tên không hợp lệ!</span>*@
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <p class="text-left">Giới tính*</p>
+                                        </div>
+                                        <div class="col-md-8 form-group btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default active">
+                                                <input type="radio" name="Gender" ng-model="gender" value="1" style="width:10px;" /> Nam
+                                            </label>
+                                            <label class="btn btn-default">
+                                                <input type="radio" name="Gender" ng-model="gender" value="0" style="width:10px;" /> Nữ
+                                            </label>                                           
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <p class="text-left">Ngày sinh*</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="input-group date" data-provide="datepicker">
+                                                <input type="text" class="form-control" name="DateOfBirth" ng-model="dateofbirth" required>
+                                                <div class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-th"></span>
+                                                </div>                                                
+                                            </div>
+                                            @*<span class="error" ng-show="registerForm.dateofbirth.$touched && registerForm.dateofbirth.$error.required" ng-bind="txt_requied"></span>*@
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="col-md-4">
+                                            <p class="text-left">Email*</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input type="email" value="" name="Email" ng-model="email" required>
+                                            <br>@*<span class="error" ng-show="registerForm.email.$touched && registerForm.email.$error.required" ng-bind="txt_requied"></span>
+                                            <span class="error" ng-show="registerForm.email.$touched && registerForm.email.$error.email" ng-bind="txt_email"></span>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                            </div>
+                            <div class="col-md-10">
+                                <p><a href="/account/login">Đăng nhập</a></p>
+                                <button class="btn-cart">Đăng ký</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr style="margin-top: -8px; margin-bottom: 8px;">
+<script src="~/Scripts/jquery-2.1.1.min.js"></script>
+<script>window.jQuery || document.write('<script src="~/Scripts/jquery-2.1.1.min.js"><\/script>')</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCHy7MUTk1eb8TB-Yn_G6z3MJVD_c0xxw"></script>
+<script src="~/Scripts/address-lookup.js"></script>
+<script>
+    $("#lookup").addressLookup({
+        "input": "#address-lookup"
+    })
+</script>
+<!--For get link image-->
+<!--For datepicker-->
+@*<script>
+        //$(document).ready(function () {
+        //    $('.datepicker').datepicker({
+        //        format: 'dd/mm/yyyy',
+        //        startDate: '-3d'
+        //    });
+    //});
+    $(document).ready(function () {
+
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+    });
+</script>*@
+<script>
+    $(document).ready(function () {
+        var app = angular.module('ShopMobile', []);
+        app.controller("registerController", function ($scope) {
+            $scope.equalPass = function () {
+                if ($scope.passwordAgain == $scope.password) {
+                    return true;
+                }
+                return false;
+            }
+            $scope.regexName = function () {
+                var regexYourname = /^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]+(([',. -][a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ])?[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]*)*$/;
+                if(regexYourname.test($scope.name))
+                {
+                    return true;
+                }
+                return false;
+            }
+            $scope.regexPass = function () {
+                var regexPass = /^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{4,}$/;
+                if (regexPass.test($scope.password))
+                {
+                    return true;
+                }
+                return false;
+            }
+            $scope.regexUserName = function () {
+                var regex = /^[a-zA-Z0-9]+$/;
+                if(regex.test($scope.username))
+                {
+                    return true;
+                }
+                return false;
+            }
+            $scope.regexImageFile = function () {
+                var regex = /\.(gif|jpg|jpeg|tiff|png)$/;
+                if (regex.test($("#imgInp").val()))
+                {
+                    return true;
+                }
+                return false;
+            }
+            $(document).ready(function () {                
+                $(document).on('change', '.btn-file :file', function () {
+                    var input = $(this),
+                        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                    input.trigger('fileselect', [label]);
+                });
+
+                $('.btn-file :file').on('fileselect', function (event, label) {
+
+                    var input = $(this).parents('.input-group').find(':text'),
+                        log = label;
+
+                    if (input.length) {
+                        input.val(log);
+                    } else {
+                        if (log) alert(log);
+                    }
+
+                });
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#img-upload').attr('src', e.target.result);
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+                $("#imgInp").change(function () {
+                    readURL(this);
+                });
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $(document).on('change', '.btn-file :file', function () {
+            var input = $(this),
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [label]);
+        });
+
+        $('.btn-file :file').on('fileselect', function (event, label) {
+
+            var input = $(this).parents('.input-group').find(':text'),
+                log = label;
+
+            if (input.length) {
+                input.val(log);
+            } else {
+                if (log)
+                    alert(log);
+            }
+
+        });
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img-upload').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgInp").change(function () {
+            if ((this.files[0].size / 1024) > 500) {
+                $('#imgInp').attr('src', '');
+                toastr.error('You select file lage: ' + Math.round((this.files[0].size / 1024) * 100) / 100 + 'KB <br\>Please select file < 500 KB !', 'Error');
+                return;
+            } else {
+                readURL(this);
+            }
+        });
+    });
+</script>
